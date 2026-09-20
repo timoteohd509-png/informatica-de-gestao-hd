@@ -1,0 +1,17 @@
+CHECKLIST — INFORMÁTICA DE GESTÃO HD / TIMÓTEO HD
+
+[ ] Gerar AAB assinado em modo Release
+[ ] Guardar o keystore de produção em segurança
+[ ] Criar conta de programador da loja
+[ ] Preparar política de privacidade
+[ ] Preparar classificação de conteúdo
+[ ] Adicionar ícone
+[ ] Adicionar imagens/capturas de ecrã
+[ ] Adicionar descrição
+[ ] Fazer teste interno
+[ ] Corrigir erros encontrados
+[ ] Enviar AAB para análise
+[ ] Aguardar revisão da loja
+
+IMPORTANTE:
+A publicação final depende das regras e verificações da loja. Este kit não contém uma chave privada de assinatura.

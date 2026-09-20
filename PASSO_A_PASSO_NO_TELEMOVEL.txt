@@ -1,0 +1,15 @@
+INFORMÁTICA DE GESTÃO HD — PASSO A PASSO NO TELEMÓVEL
+
+1. Cria/inicia sessão numa conta GitHub.
+2. Cria um repositório novo para o projecto.
+3. Envia os ficheiros do projecto Android para o repositório.
+4. Abre o separador Actions.
+5. Escolhe "Build Android AAB".
+6. Carrega em "Run workflow".
+7. Quando terminar, abre o resultado da execução.
+8. Na área Artifacts, descarrega o AAB.
+
+ATENÇÃO:
+- O AAB sem assinatura não deve ser tratado como a versão final de publicação.
+- Para produção, a assinatura deve ser configurada pelo proprietário.
+- Não partilhes comigo a palavra-passe da chave.

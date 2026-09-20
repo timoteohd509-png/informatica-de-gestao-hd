@@ -1,0 +1,21 @@
+NOME: Informática de Gestão HD
+PUBLICADOR: Timóteo HD
+
+DESCRIÇÃO CURTA:
+Estuda, pratica e acompanha o teu progresso em Informática de Gestão.
+
+DESCRIÇÃO COMPLETA:
+Informática de Gestão HD é uma aplicação de estudo criada para ajudar estudantes a rever matérias, praticar exercícios e acompanhar o seu desempenho.
+
+Inclui:
+• Matemática
+• Língua Portuguesa
+• Informática
+• Informática de Gestão
+• Exercícios e simulados
+• Correção automática
+• Pontuação e progresso
+• Perfil do aluno
+• Certificado de progresso interno
+
+A aplicação foi pensada para tornar o estudo mais organizado, prático e acessível no telemóvel.

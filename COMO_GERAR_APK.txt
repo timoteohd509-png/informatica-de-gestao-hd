@@ -1,0 +1,13 @@
+INFORMÁTICA DE GESTÃO HD — PROJECTO ANDROID V1
+
+Este pacote contém o protótipo dentro de uma aplicação Android WebView.
+Para gerar o APK:
+1. Abra a pasta no Android Studio.
+2. Aguarde a sincronização do Gradle.
+3. Use Build > Build APK(s).
+4. O APK será criado em app/build/outputs/apk/debug/.
+
+O projecto usa a página index.html como interface do aplicativo.
+Para uma versão de produção ainda será necessário acrescentar conteúdos,
+base de dados, autenticação, armazenamento de progresso e testes em vários
+telefones.

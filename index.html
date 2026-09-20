@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Informática de Gestão HD — V2</title>
+<style>
+:root{--bg:#06142a;--panel:#0b2444;--line:#205783;--blue:#0798ff;--text:#fff;--muted:#b8d0e8}
+*{box-sizing:border-box}body{margin:0;background:#020b18;color:var(--text);font-family:Arial,sans-serif}.app{max-width:480px;min-height:100vh;margin:auto;background:linear-gradient(#06142a,#082044);padding-bottom:76px}
+header{position:sticky;top:0;z-index:9;padding:13px 15px;background:#06142af5;border-bottom:1px solid var(--line)}.brand{display:flex;gap:10px;align-items:center}.brand .logo{font-size:31px}.brand h1{font-size:18px;margin:0}.brand p{font-size:11px;margin:3px 0;color:#7ed7ff}
+main{padding:14px}.screen{display:none}.screen.active{display:block}.hero{border-radius:18px;padding:19px;background:linear-gradient(135deg,#0789ff,#12396a);margin-bottom:12px}.hero h2{margin:0 0 7px}.hero p{margin:0;color:#e2f3ff}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.card{border:0;border-radius:15px;padding:15px;color:white;min-height:108px;text-align:left;font-size:16px;font-weight:700;cursor:pointer}.card small{display:block;margin-top:6px;font-weight:400;line-height:1.3}.blue{background:#087ff0}.orange{background:#ee9608}.purple{background:#6930df}.green{background:#11ae59}.red{background:#df2c45}.cyan{background:#0baabd}
+.panel{background:#0b2444;border:1px solid var(--line);border-radius:15px;padding:15px;margin:11px 0}.back{background:none;border:0;color:#8bdcff;padding:0 0 12px;font-size:15px;cursor:pointer}.btn{display:block;width:100%;border:0;border-radius:11px;background:var(--blue);color:#fff;padding:13px;font-weight:bold;margin-top:10px;cursor:pointer}.btn.alt{background:#12385d}.list button{display:block;width:100%;padding:13px;margin:7px 0;border-radius:11px;border:1px solid #28658f;background:#0a2b50;color:#fff;text-align:left;cursor:pointer}.badge{display:inline-block;background:#123c61;color:#90dcff;border-radius:18px;padding:5px 9px;font-size:11px}.bar{height:10px;background:#12304e;border-radius:8px;overflow:hidden}.bar span{display:block;height:100%;background:#12a8ff}.question{font-size:18px;line-height:1.4}.option{width:100%;border:1px solid #2c6e9c;background:#0a2b50;color:#fff;border-radius:10px;padding:12px;margin:7px 0;text-align:left;cursor:pointer}.option.correct{border-color:#31e47d;background:#0a3d31}.option.wrong{border-color:#ff586e;background:#4b1821}.score{text-align:center;font-size:46px;font-weight:bold;color:#4bc8ff}.muted{color:var(--muted)}.center{text-align:center}.topic{padding:11px 0;border-bottom:1px solid #1d4668}.topic:last-child{border:0}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(480px,100%);background:#061326;border-top:1px solid var(--line);display:flex;z-index:20}nav button{flex:1;border:0;background:none;color:#abc4dc;padding:9px 2px;font-size:10px;cursor:pointer}nav strong{display:block;font-size:17px;margin-bottom:2px}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="brand"><div class="logo">🎓</div><div><h1>INFORMÁTICA DE GESTÃO HD</h1><p>Aprende • Pratica • Evolui</p></div></div></header>
+<main>
+
+<section id="home" class="screen active">
+<div class="hero"><h2>Olá, Timóteo! 👋</h2><p>Continua a estudar. Pequenos passos todos os dias fazem diferença.</p></div>
+<div class="panel"><b>📈 Progresso geral — 32%</b><div class="bar" style="margin-top:9px"><span style="width:32%"></span></div><small class="muted">171 de 530 pontos</small></div>
+<div class="grid">
+<button class="card blue" onclick="openSubject('math')">📐 Matemática<small>Percentagem, trigonometria, limites, funções</small></button>
+<button class="card orange" onclick="openSubject('port')">📖 Português<small>Gramática, verbos, textos e interpretação</small></button>
+<button class="card purple" onclick="openSubject('info')">💻 Informática<small>Hardware, software, redes e bases de dados</small></button>
+<button class="card green" onclick="openSubject('gestao')">📊 Gestão<small>Sistemas, dados e processos de gestão</small></button>
+<button class="card red" onclick="show('simulados')">📝 Simulados<small>Testes por disciplina e prova completa</small></button>
+<button class="card cyan" onclick="show('progress')">🏆 Progresso<small>Notas, metas e desempenho</small></button>
+</div>
+<div class="panel" onclick="startQuiz('review')" style="cursor:pointer"><b>⚡ Revisão rápida</b><p class="muted">5 perguntas para treinar em poucos minutos.</p></div>
+</section>
+
+<section id="subject" class="screen">
+<button class="back" onclick="show(last)">← Voltar</button>
+<div class="hero"><span id="subjectBadge" class="badge"></span><h2 id="subjectName"></h2><p id="subjectDesc"></p></div>
+<div class="list" id="topicList"></div>
+<button class="btn" onclick="startQuiz('subject')">📝 Fazer exercícios</button>
+</section>
+
+<section id="lesson" class="screen">
+<button class="back" onclick="show('subject')">← Voltar</button>
+<div class="panel"><span class="badge">MATÉRIA</span><h2 id="lessonTitle"></h2><p id="lessonIntro"></p></div>
+<div class="panel"><h3>📌 Resumo</h3><p id="lessonBody" class="muted"></p></div>
+<div class="panel"><h3>💡 Exemplo</h3><p id="lessonExample"></p></div>
+<button class="btn" onclick="startQuiz('subject')">Praticar este conteúdo</button>
+</section>
+
+<section id="quiz" class="screen">
+<button class="back" onclick="show('home')">← Sair</button>
+<div class="panel"><span class="badge" id="quizBadge"></span><h3 id="qText"></h3><div id="options"></div><p id="feedback"></p></div>
+<button class="btn" id="nextBtn" onclick="nextQuestion()">Próxima</button>
+</section>
+
+<section id="result" class="screen">
+<div class="panel center"><span class="badge">RESULTADO</span><h2>Simulado concluído 🎉</h2><div class="score" id="resultScore"></div><p id="resultText" class="muted"></p></div>
+<button class="btn" onclick="startQuiz('subject')">Tentar novamente</button><button class="btn alt" onclick="show('home')">Voltar ao início</button>
+</section>
+
+<section id="simulados" class="screen">
+<button class="back" onclick="show('home')">← Voltar</button><h2>📝 Simulados</h2>
+<div class="panel"><h3>📚 Simulado completo</h3><p class="muted">20 perguntas — Matemática, Português, Informática e Gestão.</p><button class="btn" onclick="startQuiz('full')">Começar</button></div>
+<div class="panel"><h3>🎯 Por disciplina</h3><button class="list" onclick="startQuiz('math')">Matemática — 10 perguntas</button><button class="list" onclick="startQuiz('port')">Português — 10 perguntas</button><button class="list" onclick="startQuiz('info')">Informática — 10 perguntas</button><button class="list" onclick="startQuiz('gestao')">Gestão — 10 perguntas</button></div>
+</section>
+
+<section id="progress" class="screen">
+<button class="back" onclick="show('home')">← Voltar</button><h2>🏆 Meu Progresso</h2>
+<div class="panel center"><div class="score">32%</div><p>171 / 530 pontos</p><div class="bar"><span style="width:32%"></span></div></div>
+<div class="panel"><h3>Disciplinas</h3><p>📐 Matemática — 45%</p><div class="bar"><span style="width:45%"></span></div><p>📖 Português — 30%</p><div class="bar"><span style="width:30%"></span></div><p>💻 Informática — 25%</p><div class="bar"><span style="width:25%"></span></div><p>📊 Gestão — 20%</p><div class="bar"><span style="width:20%"></span></div></div>
+<div class="panel"><h3>🔥 Meta</h3><p class="muted">Completa pelo menos 5 exercícios por dia.</p></div>
+</section>
+
+</main>
+<nav><button onclick="show('home')"><strong>🏠</strong>Início</button><button onclick="openSubject('math')"><strong>📚</strong>Matérias</button><button onclick="show('simulados')"><strong>📝</strong>Simulados</button><button onclick="show('progress')"><strong>🏆</strong>Progresso</button></nav>
+</div>
+
+<script>
+const data={
+math:{name:"Matemática",color:"blue",desc:"Domina os cálculos e pratica passo a passo.",topics:[
+["Fundamentos de Percentagem","Percentagem representa uma parte de 100. Para calcular p% de N, usa p/100 × N.","20% de 150 = 0,20 × 150 = 30."],
+["Razões Trigonométricas","Num triângulo rectângulo: seno = oposto/hipotenusa, cosseno = adjacente/hipotenusa e tangente = oposto/adjacente.","Para 30°, sen(30°)=1/2."],
+["Limites","Estuda o valor que uma função se aproxima de atingir quando x se aproxima de um ponto.","Em formas 0/0, simplifica a expressão antes de substituir."],
+["Equações Trigonométricas","Usa relações de seno, cosseno e tangente e considera as soluções no intervalo pedido.","sen(x)=0 tem soluções x=kπ."],
+["Função Quadrática","Tem forma f(x)=ax²+bx+c. O discriminante é Δ=b²−4ac.","As raízes, quando existem, vêm da fórmula de Bhaskara."],
+["Função Linear e Afim","A linear tem forma f(x)=ax; a afim tem forma f(x)=ax+b.","O coeficiente a indica a inclinação da recta."]
+]},
+port:{name:"Língua Portuguesa",color:"orange",desc:"Melhora a gramática, a escrita e a interpretação.",topics:[
+["Classes de palavras","Substantivo, adjectivo, verbo, advérbio, pronome e outras classes têm funções diferentes na frase.","Em “A prova é importante”, “importante” é adjectivo."],
+["Plural","Algumas palavras alteram a terminação no plural.","país → países."],
+["Verbos","Os verbos variam em pessoa, número, tempo e modo.","“Os estudantes resolveram” está no pretérito perfeito do indicativo."],
+["Interpretação de texto","Identifica tema, ideia principal, informações explícitas e inferências justificadas.","Responde com base no texto e evita inventar informação."]
+]},
+info:{name:"Informática",color:"purple",desc:"Conhece os fundamentos digitais essenciais.",topics:[
+["Hardware e Software","Hardware é a parte física; software são programas e instruções.","Teclado é hardware; sistema operativo é software."],
+["Sistemas Operativos","Gerem recursos do computador e permitem executar aplicações.","Windows, Linux e Android são exemplos."],
+["Internet e Redes","Redes ligam dispositivos e permitem comunicação e partilha de recursos.","Um router encaminha dados entre redes."],
+["Bases de Dados","Organizam dados para armazenamento, consulta e gestão.","Uma tabela pode conter campos e registos."]
+]},
+gestao:{name:"Informática de Gestão",color:"green",desc:"Relaciona tecnologia, informação e processos de gestão.",topics:[
+["Sistemas de Informação","Recolhem, processam, armazenam e distribuem informação para apoiar actividades e decisões.","Um sistema de vendas pode registar clientes, produtos e transacções."],
+["Gestão de Dados","Procura manter dados organizados, consistentes, acessíveis e protegidos.","Normalização reduz redundância em bases de dados."],
+["Processos de Gestão","Transformam recursos e informação em actividades e resultados.","Mapear um processo ajuda a identificar etapas e pontos de melhoria."],
+["Tecnologias de Gestão","Ferramentas digitais podem apoiar planeamento, controlo, comunicação e análise.","Dashboards ajudam a acompanhar indicadores."]
+]}
+};
+
+const questions=[
+{d:"math",q:"Quanto é 20% de 150?",o:["20","30","35","40"],a:1},
+{d:"math",q:"Qual é a fórmula do discriminante?",o:["Δ=b²−4ac","Δ=a²−4bc","Δ=b−4ac","Δ=a+b+c"],a:0},
+{d:"math",q:"sen(30°) é igual a:",o:["0","1/2","√2/2","1"],a:1},
+{d:"port",q:"Na frase “A prova é importante”, “importante” é:",o:["verbo","substantivo","adjectivo","advérbio"],a:2},
+{d:"port",q:"O plural de “país” é:",o:["países","paizes","paísses","paiz"],a:0},
+{d:"info",q:"Qual é hardware?",o:["Teclado","Sistema operativo","Navegador","Aplicação"],a:0},
+{d:"info",q:"Qual é um sistema operativo?",o:["Linux","Google","HTML","Wi-Fi"],a:0},
+{d:"gestao",q:"Um sistema de informação pode:",o:["Apenas imprimir","Recolher e processar informação","Substituir toda a gestão","Funcionar sem dados"],a:1},
+{d:"gestao",q:"O que ajuda a acompanhar indicadores?",o:["Dashboard","Teclado","Cabo USB","Monitor desligado"],a:0}
+];
+
+let last="home",subject="math",quiz=[],qi=0,score=0,answered=false;
+function show(id){document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");window.scrollTo(0,0)}
+function openSubject(id){subject=id;const d=data[id];document.getElementById("subjectName").textContent=d.name;document.getElementById("subjectDesc").textContent=d.desc;document.getElementById("subjectBadge").textContent="DISCIPLINA";document.getElementById("topicList").innerHTML=d.topics.map((t,i)=>`<button onclick="lesson(${i})">📚 ${t[0]}<small style="display:block;color:#a9c8df;margin-top:4px">${t[1]}</small></button>`).join("");last="home";show("subject")}
+function lesson(i){const t=data[subject].topics[i];document.getElementById("lessonTitle").textContent=t[0];document.getElementById("lessonIntro").textContent=t[1];document.getElementById("lessonBody").textContent=t[1]+" Estuda a definição, identifica as regras essenciais e pratica com exemplos.";document.getElementById("lessonExample").textContent=t[2];show("lesson")}
+function startQuiz(type){if(type==="subject") quiz=questions.filter(q=>q.d===subject);else if(type==="full") quiz=[...questions];else if(type==="review") quiz=questions.slice(0,5);else quiz=questions.filter(q=>q.d===type);qi=0;score=0;answered=false;renderQuestion();show("quiz")}
+function renderQuestion(){answered=false;const q=quiz[qi];document.getElementById("quizBadge").textContent=`QUESTÃO ${qi+1} DE ${quiz.length}`;document.getElementById("qText").textContent=q.q;document.getElementById("feedback").textContent="";document.getElementById("nextBtn").textContent=qi===quiz.length-1?"Concluir":"Próxima";document.getElementById("options").innerHTML=q.o.map((x,i)=>`<button class="option" onclick="choose(${i},this)">${String.fromCharCode(65+i)}) ${x}</button>`).join("")}
+function choose(i,el){if(answered)return;answered=true;const q=quiz[qi];document.querySelectorAll(".option").forEach((b,j)=>{if(j===q.a)b.classList.add("correct")});if(i===q.a){score++;document.getElementById("feedback").textContent="✅ Correcto!";el.classList.add("correct")}else{document.getElementById("feedback").textContent="❌ Resposta incorrecta.";el.classList.add("wrong")}}
+function nextQuestion(){if(!answered){document.getElementById("feedback").textContent="Escolhe uma resposta primeiro.";return}if(qi<quiz.length-1){qi++;renderQuestion()}else{document.getElementById("resultScore").textContent=`${score}/${quiz.length}`;document.getElementById("resultText").textContent=`Acertaste ${Math.round(score/quiz.length*100)}% das perguntas.`;show("result")}}
+</script>
+</body></html>
